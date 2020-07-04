@@ -9,12 +9,12 @@ import App from './App';
 import theme from './theme';
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-    <CssBaseline />
-    <App />
-  </ThemeProvider>,
-  document.querySelector('#root'),
+    <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <App />
+    </ThemeProvider>,
+    document.querySelector('#root'),
 );
 
 // If you want your app to work offline and load faster, you can change

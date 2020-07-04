@@ -1,9 +1,14 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText('Create React App v4-beta example with TypeScript');
-  expect(linkElement).toBeInTheDocument();
+import { shallow, ShallowWrapper } from 'enzyme';
+
+import App from './App';
+import { find } from './tests/utils/FindHelpers';
+
+describe('<App />', () => {
+    it('has app title', () => {
+        const wrapper = shallow(<App />);
+        const title = find(wrapper, 'title');
+        expect(title.text()).toEqual('COSMIC-RETRO');
+    });
 });

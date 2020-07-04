@@ -1,0 +1,55 @@
+{
+    "extends": "tslint:recommended",
+    "compilerOptions": {
+        "plugins": [{
+            "name": "typescript-tslint-plugin",
+            "alwaysShowRuleFailuresAsWarnings": false,
+            "ignoreDefinitionFiles": true,
+            "configFile": "../tslint.json",
+            "suppressWhileTypeErrorsPresent": false
+        }]
+    },
+    "rules": {
+        "max-line-length": {
+            "options": [
+                120
+            ]
+        },
+        "new-parens": true,
+        "no-arg": true,
+        "no-bitwise": false,
+        "no-conditional-assignment": true,
+        "no-consecutive-blank-lines": false,
+        "no-unnecessary-class": true,
+        "object-literal-sort-keys": false,
+        "quotemark": [
+            true,
+            "single",
+            "avoid-escape",
+            "avoid-template"
+        ],
+        "interface-name": [
+            true,
+            "never-prefix"
+        ],
+        "no-console": {
+            "severity": "warning",
+            "options": [
+                "debug",
+                "info",
+                "log",
+                "time",
+                "timeEnd",
+                "trace"
+            ]
+        },
+        "semicolon": [true, "always"]
+    },
+    "jsRules": {
+        "max-line-length": {
+            "options": [
+                120
+            ]
+        }
+    }
+}
