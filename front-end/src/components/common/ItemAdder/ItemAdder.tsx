@@ -13,6 +13,14 @@ export default class ItemAdder extends React.Component<ItemAdderProps, ItemAdder
         };
     }
 
+    handleEnterInsert(event: React.KeyboardEvent) {
+        if (event.key !== 'Enter') {
+            return;
+        }
+
+        this.insertItem();
+    }
+
     insertItem() {
         this.props.insertItem(this.state.message);
         this.setState({ message: '' });
@@ -21,7 +29,10 @@ export default class ItemAdder extends React.Component<ItemAdderProps, ItemAdder
     render() {
         return (
             <>
-                <TextField data-test-id='text-insert' />
+                <TextField
+                    data-test-id='text-insert'
+                    onKeyDown={(event: React.KeyboardEvent) => this.handleEnterInsert(event)}
+                />
                 <IconButton aria-label='add' data-test-id='text-add' onClick={() => this.insertItem()}>
                     <AddBoxIcon />
                 </IconButton>

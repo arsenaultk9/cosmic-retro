@@ -8,9 +8,10 @@ import { find } from '../../../tests/utils/FindHelpers';
 describe('<ItemAdder />', () => {
     let wrapper: ShallowWrapper<any, any, ItemAdder>;
 
-    const onInsertItem = jest.fn();
+    let onInsertItem: jest.Mock<any, any>;
 
     beforeEach(() => {
+        onInsertItem = jest.fn();
         wrapper = shallow(<ItemAdder insertItem={onInsertItem} />);
     });
 
@@ -34,7 +35,7 @@ describe('<ItemAdder />', () => {
         wrapper.setState({ message: typedText });
 
         const textInsert = find(wrapper, 'text-insert');
-        textInsert.simulate('keydown', { key: 'enter' });
+        textInsert.simulate('keydown', { key: 'Enter' });
 
         expect(onInsertItem.mock.calls.length).toEqual(1);
         expect(onInsertItem.mock.calls[0][0]).toEqual(typedText);
