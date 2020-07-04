@@ -3,10 +3,12 @@ import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import ItemAdder from './ItemAdder';
 import { find } from '../../../tests/utils/FindHelpers';
+import ItemAdderState from './ItemAdderState';
+import ItemAdderProps from './ItemAdderProps';
 
 
 describe('<ItemAdder />', () => {
-    let wrapper: ShallowWrapper<any, any, ItemAdder>;
+    let wrapper: ShallowWrapper<ItemAdderProps, ItemAdderState, ItemAdder>;
 
     let onInsertItem: jest.Mock<any, any>;
 

@@ -1,15 +1,15 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 
 export const find = (
-    wrapper: ShallowWrapper,
+    wrapper: ShallowWrapper<any, any, any>,
     selector: string
 ): ShallowWrapper => {
-    return wrapper.find(`[data-test-id="${selector}"]`)
-}
+    return wrapper.find(`[data-test-id="${selector}"]`);
+};
 
 export const findAllForGroup = (
-    wrapper: ShallowWrapper,
+    wrapper: ShallowWrapper<any, any, any>,
     selector: string
 ): ShallowWrapper => {
-    return wrapper.find(`[data-test-group="${selector}"]`)
-}
+    return wrapper.find(`[data-test-group="${selector}"]`);
+};
