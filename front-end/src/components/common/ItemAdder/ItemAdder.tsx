@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { TextField, IconButton } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import ItemAdderState from './ItemAdderState';
@@ -21,7 +21,13 @@ export default class ItemAdder extends React.Component<ItemAdderProps, ItemAdder
         this.insertItem();
     }
 
+    handleKeyPress(event: any) {
+        this.setState({ message: event.target.value });
+    }
+
     insertItem() {
+        if (!this.state.message) return;
+
         this.props.insertItem(this.state.message);
         this.setState({ message: '' });
     }
@@ -32,6 +38,8 @@ export default class ItemAdder extends React.Component<ItemAdderProps, ItemAdder
                 <TextField
                     data-test-id='text-insert'
                     onKeyDown={(event: React.KeyboardEvent) => this.handleEnterInsert(event)}
+                    onChange={(event: ChangeEvent) => this.handleKeyPress(event)}
+                    value={this.state.message}
                 />
                 <IconButton aria-label='add' data-test-id='text-add' onClick={() => this.insertItem()}>
                     <AddBoxIcon />

@@ -32,6 +32,13 @@ describe('<ItemAdder />', () => {
         expect(onInsertItem.mock.calls[0][0]).toEqual(typedText);
     });
 
+    it('when click on add, no text, does not send insert item', () => {
+        const textAdd = find(wrapper, 'text-add');
+        textAdd.simulate('click');
+
+        expect(onInsertItem.mock.calls.length).toEqual(0);
+    });
+
     it('when press on enter, send insert item', () => {
         const typedText = 'Inserted item';
         wrapper.setState({ message: typedText });
@@ -47,9 +54,21 @@ describe('<ItemAdder />', () => {
         const typedText = 'Inserted item';
         wrapper.setState({ message: typedText });
 
-        const textInsert = find(wrapper, 'text-add');
+        let textInsert = find(wrapper, 'text-add');
         textInsert.simulate('click');
 
         expect(wrapper.state().message).toEqual('');
+
+        textInsert = find(wrapper, 'text-insert');
+        expect((textInsert.props() as any).value).toEqual('');
+    });
+
+    it('when enter text, updates content state', () => {
+        let textInsert = find(wrapper, 'text-insert');
+        textInsert.simulate('change', { target: { value: 'text' } });
+        textInsert = find(wrapper, 'text-insert');
+
+        expect(wrapper.state().message).toEqual('text');
+        expect((textInsert.props() as any).value).toEqual('text');
     });
 });
