@@ -1,5 +1,5 @@
 import React from 'react';
-import FeedbacksProps from './Feedbacks.props';
+import { FeedbacksProps } from './Feedbacks.props';
 import { List, Typography, ListItem } from '@material-ui/core';
 import ItemAdder from '../../common/ItemAdder/ItemAdder';
 import FeedbackModel from '../../../models/FeedbackModel';

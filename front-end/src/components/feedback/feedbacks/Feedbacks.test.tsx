@@ -5,7 +5,7 @@ import FeedbackModelObjectMother from '../../../tests/objectmothers/models/Feedb
 import { ShallowWrapper, shallow } from 'enzyme';
 import React from 'react';
 import { find, findAllForGroup } from '../../../tests/utils/FindHelpers';
-import FeedbacksProps from './Feedbacks.props';
+import { FeedbacksProps } from './Feedbacks.props';
 import FeedbackStateObjectMother from '../../../tests/objectmothers/reducers/FeedbackStateObjectMother';
 
 describe('<Feedbacks />', () => {

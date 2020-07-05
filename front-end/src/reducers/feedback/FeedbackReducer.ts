@@ -10,6 +10,13 @@ const feedbackReducer = (state: FeedbackState = List<FeedbackModel>(), action: F
             if (!action.feedback) return state;
 
             return state.push(action.feedback);
+
+        case FeedbackActionTypes.SET_FEEDBACKS:
+            if (!action.feedbacks) return state;
+
+            action.feedbacks.forEach(f => state = state.push(f));
+            return state;
+
         default:
             return state;
     }

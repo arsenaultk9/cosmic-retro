@@ -9,6 +9,14 @@ function addFeedback(feedback: FeedbackModel): FeedbackAction {
     };
 }
 
+function setFeedbacks(feedbacks: FeedbackModel[]): FeedbackAction {
+    return {
+        type: FeedbackActionTypes.SET_FEEDBACKS,
+        feedbacks
+    };
+}
+
 export default {
-    addFeedback
+    addFeedback,
+    setFeedbacks
 };

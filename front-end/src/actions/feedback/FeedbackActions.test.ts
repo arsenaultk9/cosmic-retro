@@ -19,4 +19,21 @@ describe('FeedbackActions tests', () => {
 
         expect(action).toEqual(expectedAction);
     });
+
+    it('Sets feedbacks', () => {
+        // ARRANGE
+        const feedbackA = FeedbackModelObjectMother.get();
+        const feedbackB = FeedbackModelObjectMother.get();
+
+        // ACT
+        const action = FeedbackActions.setFeedbacks([feedbackA, feedbackB]);
+
+        // ASSERT
+        const expectedAction: FeedbackAction = {
+            type: FeedbackActionTypes.SET_FEEDBACKS,
+            feedbacks: [feedbackA, feedbackB]
+        };
+
+        expect(action).toEqual(expectedAction);
+    });
 });

@@ -29,4 +29,23 @@ describe('FeedbackReducer tests', () => {
         // ASSERT
         expect(reducer).toBe(state);
     });
+
+    it('Sets feedbacks', () => {
+        // ARRANGE
+        const feedbackA = FeedbackModelObjectMother.get('FeedbackA');
+        const feedbackB = FeedbackModelObjectMother.get('FeedbackB');
+
+        const state = List<FeedbackModel>();
+
+        // ACT
+        const reducer = feedbackReducer(state, {
+            type: FeedbackActionTypes.SET_FEEDBACKS, feedbacks: [feedbackA, feedbackB]
+        });
+
+        // ASSERT
+        expect(reducer.size).toEqual(2);
+
+        expect(reducer.get(0)).toBe(feedbackA);
+        expect(reducer.get(1)).toBe(feedbackB);
+    });
 });
