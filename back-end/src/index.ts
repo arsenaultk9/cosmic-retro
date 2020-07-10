@@ -1,4 +1,4 @@
-import express = require('express');
+import express from 'express';
 
 // Create a new express app instance
 const app: express.Application = express();
@@ -6,6 +6,6 @@ app.get('/', function (req, res) {
     res.send('Hello World!');
 });
 
-app.listen(5480, function () {
-    console.log('App is listening on port 5480!');
+app.listen(5481, function () {
+    console.log('App is listening on port 5481! ');
 });
