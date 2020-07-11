@@ -2,7 +2,8 @@
   "name": "cosmic-retro-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "src/index.ts",
+  "type": "module",
   "scripts": {
     "start": "nodemon --inspect ./dist",
     "test": "jest --watch",

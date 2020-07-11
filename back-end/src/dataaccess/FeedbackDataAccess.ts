@@ -2,10 +2,14 @@ import FeedbackModel from '../models/FeedbackModel';
 
 
 function getAll(): FeedbackModel[] {
-    return [];
+    return [
+        { content: 'More powa' },
+        { content: 'Next item' }
+    ];
 }
 
 function save(feedback: FeedbackModel) {
+    console.log(`saved feedback: ${feedback}`);
     return;
 }
 

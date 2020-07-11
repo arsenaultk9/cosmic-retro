@@ -12,7 +12,6 @@ async function getAll(request: Request, response: Response) {
 
 async function save(request: Request, response: Response) {
     try {
-        // We only pass the body object, never the req object
         FeedbackServices.save(request.body);
         return response.status(200);
     } catch (err) {
