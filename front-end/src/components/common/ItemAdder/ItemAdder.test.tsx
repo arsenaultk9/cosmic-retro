@@ -28,15 +28,15 @@ describe('<ItemAdder />', () => {
         const textAdd = find(wrapper, 'text-add');
         textAdd.simulate('click');
 
-        expect(onInsertItem.mock.calls.length).toEqual(1);
-        expect(onInsertItem.mock.calls[0][0]).toEqual(typedText);
+        expect(onInsertItem).toHaveBeenCalled();
+        expect(onInsertItem).toHaveBeenCalledWith(typedText);
     });
 
     it('when click on add, no text, does not send insert item', () => {
         const textAdd = find(wrapper, 'text-add');
         textAdd.simulate('click');
 
-        expect(onInsertItem.mock.calls.length).toEqual(0);
+        expect(onInsertItem).toHaveBeenCalledTimes(0);
     });
 
     it('when press on enter, send insert item', () => {
@@ -46,8 +46,8 @@ describe('<ItemAdder />', () => {
         const textInsert = find(wrapper, 'text-insert');
         textInsert.simulate('keydown', { key: 'Enter' });
 
-        expect(onInsertItem.mock.calls.length).toEqual(1);
-        expect(onInsertItem.mock.calls[0][0]).toEqual(typedText);
+        expect(onInsertItem).toHaveBeenCalled();
+        expect(onInsertItem).toHaveBeenCalledWith(typedText);
     });
 
     it('when insert item, text is cleared', () => {

@@ -1,8 +1,8 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 
 // Create a new express app instance
 const app: express.Application = express();
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
 });
 

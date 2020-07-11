@@ -30,8 +30,8 @@ describe('FeedbackServices tests', () => {
             FeedbackServices.save(FEEDBACK_A);
 
             // ASSERT
-            expect(dataAccessSave.mock.calls.length).toEqual(1);
-            expect(dataAccessSave.mock.calls[0][0]).toBe(FEEDBACK_A);
+            expect(dataAccessSave).toHaveBeenCalled();
+            expect(dataAccessSave).toHaveBeenCalledWith(FEEDBACK_A);
         });
     });
 });
