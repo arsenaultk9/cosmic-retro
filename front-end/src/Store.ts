@@ -4,6 +4,7 @@ import Thunk from 'redux-thunk';
 import State from './State';
 import feedbackReducer from './reducers/feedback/FeedbackReducer';
 import ActionTypes from './actions/types/ActionTypes';
+import FeedbackActions from './actions/feedback/FeedbackActions';
 
 const songApp = combineReducers<State>({
     feedbacks: feedbackReducer,
@@ -33,4 +34,5 @@ const enhancer = composeEnhancers(
 
 const store: Store<State> = createStore<State, any, any, any>(rootReducer, enhancer);
 
+FeedbackActions.getFeedbacks()(store.dispatch);
 export default store;

@@ -17,7 +17,7 @@ const mapStateToProps = (storeState: State): FeedbacksMapToStateProps => {
 const mapDispatchToProps = (dispatch: Dispatch<FeedbackAction>): FeedbacksMapToDispatch => {
     return {
         addFeedback: (feedback: FeedbackModel) => {
-            dispatch(FeedbackActions.addFeedback(feedback));
+            FeedbackActions.addFeedback(feedback)(dispatch);
         }
     };
 };

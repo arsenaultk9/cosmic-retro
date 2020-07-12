@@ -1,14 +1,18 @@
-import express, { Request, Response } from 'express';
-import FeedbackRoutes from './routes/FeedbackRoutes';
+import express from 'express';
+import bodyParser from 'body-parser';
 
-// Create a new express app instance
+import FeedbackRoutes from './routes/FeedbackRoutes';
+import CorsMiddleware from './middleware/CorsMiddleware';
+
 const app: express.Application = express();
 
-FeedbackRoutes.register(app);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
-});
+CorsMiddleware.register(app);
+
+// Routes
+FeedbackRoutes.register(app);
 
 app.listen(5481, () => {
     console.log('App is listening on port 5481! ');

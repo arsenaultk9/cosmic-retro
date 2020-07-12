@@ -9,7 +9,7 @@ function getAll(): FeedbackModel[] {
 }
 
 function save(feedback: FeedbackModel) {
-    console.log(`saved feedback: ${feedback}`);
+    console.log('saved feedback:', feedback);
     return;
 }
 

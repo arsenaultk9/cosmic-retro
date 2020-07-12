@@ -2,38 +2,55 @@ import FeedbackModelObjectMother from '../../tests/objectmothers/models/Feedback
 import FeedbackActions from './FeedbackActions';
 import FeedbackActionTypes from '../types/FeedbackActionTypes';
 import FeedbackAction from '../../reducers/feedback/FeedbackAction';
+import FeedbackApi from '../../api/FeedbackApi';
 
 describe('FeedbackActions tests', () => {
-    it('Adds feeback', () => {
+    const FEEDBACK_A = FeedbackModelObjectMother.get('feedbackA');
+    const FEEDBACK_B = FeedbackModelObjectMother.get('feedbackB');
+
+    it('Adds feeback', async () => {
         // ARRANGE
-        const feedback = FeedbackModelObjectMother.get();
+        FeedbackApi.addFeedback = jest.fn();
+        const dispatch = jest.fn();
 
         // ACT
-        const action = FeedbackActions.addFeedback(feedback);
+        await FeedbackActions.addFeedback(FEEDBACK_A)(dispatch);
 
         // ASSERT
         const expectedAction: FeedbackAction = {
             type: FeedbackActionTypes.ADD_FEEDBACK,
-            feedback
+            feedback: FEEDBACK_A
+        };
+
+        expect(dispatch).toHaveBeenCalledWith(expectedAction);
+        expect(FeedbackApi.addFeedback).toHaveBeenCalledWith(FEEDBACK_A);
+    });
+
+    it('Sets feedbacks', () => {
+        const action = FeedbackActions.setFeedbacks([FEEDBACK_A, FEEDBACK_B]);
+
+        const expectedAction: FeedbackAction = {
+            type: FeedbackActionTypes.SET_FEEDBACKS,
+            feedbacks: [FEEDBACK_A, FEEDBACK_B]
         };
 
         expect(action).toEqual(expectedAction);
     });
 
-    it('Sets feedbacks', () => {
+    it('Gets feedbacks', async () => {
         // ARRANGE
-        const feedbackA = FeedbackModelObjectMother.get();
-        const feedbackB = FeedbackModelObjectMother.get();
+        FeedbackApi.getFeedbacks = jest.fn().mockReturnValue({ data: [FEEDBACK_A, FEEDBACK_B] });
+        const dispatch = jest.fn();
 
         // ACT
-        const action = FeedbackActions.setFeedbacks([feedbackA, feedbackB]);
+        await FeedbackActions.getFeedbacks()(dispatch);
 
         // ASSERT
         const expectedAction: FeedbackAction = {
             type: FeedbackActionTypes.SET_FEEDBACKS,
-            feedbacks: [feedbackA, feedbackB]
+            feedbacks: [FEEDBACK_A, FEEDBACK_B]
         };
 
-        expect(action).toEqual(expectedAction);
+        expect(dispatch).toHaveBeenCalledWith(expectedAction);
     });
 });

@@ -13,7 +13,7 @@ async function getAll(request: Request, response: Response) {
 async function save(request: Request, response: Response) {
     try {
         FeedbackServices.save(request.body);
-        return response.status(200);
+        return response.status(200).json();
     } catch (err) {
         response.status(500).send(err);
     }
