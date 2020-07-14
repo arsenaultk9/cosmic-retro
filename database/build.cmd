@@ -1,1 +1,1 @@
-docker run --name rethink -p 4551:8080 -d cosmicretro 
+docker run --name rethink -p 4551:8080 -p 28015:28015 -d cosmicretro 
