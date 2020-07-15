@@ -38,3 +38,20 @@ socket.on('connection', (socket: any) => {
         console.log(message);
     });
 });
+
+// Rethinkdb prototype
+import r from 'rethinkdb';
+
+r.connect({ host: 'localhost', port: 28015 }, (connectionError, conn) => {
+    if (connectionError) throw connectionError;
+
+    r.db('test').tableCreate('tv_shows').run(conn, (tableCreationError, tableCreateResult) => {
+        if (tableCreationError) throw tableCreationError;
+        console.log(tableCreateResult);
+
+        r.table('tv_shows').insert({ name: 'Star Trek TNG' }).run(conn, (tableInsertError, tableInsertResult) => {
+            if (tableInsertError) throw tableInsertError;
+            console.log(tableInsertResult);
+        });
+    });
+});
