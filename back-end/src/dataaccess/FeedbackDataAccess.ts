@@ -1,16 +1,14 @@
 import FeedbackModel from '../models/FeedbackModel';
+import TableDataAccessProxy from './TableDataAccessProxy';
 
+const feedbackDataAccessProxy = TableDataAccessProxy.tableDataAccessProxy('feedbacks');
 
 function getAll(): FeedbackModel[] {
-    return [
-        { content: 'More powa' },
-        { content: 'Next item' }
-    ];
+    return feedbackDataAccessProxy.getAll();
 }
 
 function save(feedback: FeedbackModel) {
-    console.log('saved feedback:', feedback);
-    return;
+    feedbackDataAccessProxy.insert(feedback);
 }
 
 export default {
