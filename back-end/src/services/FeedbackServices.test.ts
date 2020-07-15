@@ -7,13 +7,13 @@ describe('FeedbackServices tests', () => {
     const FEEDBACK_B = FeedbackModelObjectMother.get('feedbackB');
 
     describe('getAll', () => {
-        it('gets feedbacks', () => {
+        it('gets feedbacks', async () => {
             // ARRANGE
             const dataFeedbacks = [FEEDBACK_A, FEEDBACK_B];
-            FeedbackDataAccess.getAll = () => dataFeedbacks;
+            FeedbackDataAccess.getAll = () => Promise.resolve(dataFeedbacks);
 
             // ACT
-            const serviceFeedbacks = FeedbackServices.getAll();
+            const serviceFeedbacks = await FeedbackServices.getAll();
 
             // ASSERT
             expect(serviceFeedbacks).toBe(dataFeedbacks);

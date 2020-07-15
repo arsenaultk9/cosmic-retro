@@ -9,15 +9,15 @@ describe('Feedback Controller tests', () => {
     const FEEDBACK_B = FeedbackModelObjectMother.get('feedbackB');
 
     describe('getAll', () => {
-        it('returns feedbacks', () => {
+        it('returns feedbacks', async () => {
             // ARRANGE
             const request = RequestMock.get();
             const response = ResponseMock.get();
 
-            FeedbackServices.getAll = () => [FEEDBACK_A, FEEDBACK_B];
+            FeedbackServices.getAll = () => Promise.resolve([FEEDBACK_A, FEEDBACK_B]);
 
             // ACT
-            FeedbackController.getAll(request, response);
+            await FeedbackController.getAll(request, response);
 
             // ASSERT
             expect(response.send).toHaveBeenCalled();

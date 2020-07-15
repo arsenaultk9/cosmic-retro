@@ -3,7 +3,7 @@ import FeedbackServices from '../services/FeedbackServices';
 
 async function getAll(request: Request, response: Response) {
     try {
-        const feedbacks = FeedbackServices.getAll();
+        const feedbacks = await FeedbackServices.getAll();
         return response.status(200).send(feedbacks);
     } catch (err) {
         response.status(500).send(err);

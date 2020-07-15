@@ -3,7 +3,7 @@ import TableDataAccessProxy from './TableDataAccessProxy';
 
 const feedbackDataAccessProxy = TableDataAccessProxy.tableDataAccessProxy('feedbacks');
 
-function getAll(): FeedbackModel[] {
+async function getAll(): Promise<FeedbackModel[]> {
     return feedbackDataAccessProxy.getAll();
 }
 

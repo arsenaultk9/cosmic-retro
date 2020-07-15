@@ -1,39 +1,58 @@
-import rethink, { Table } from 'rethinkdb';
+import rethink, { Table, Connection } from 'rethinkdb';
 import ConnectionInfo from './ConnectionInfo';
 
-function getTableAndConnection(tableName: string): { table: rethink.Table, connection: rethink.Connection } {
-  rethink.connect({ host: ConnectionInfo.host, port: ConnectionInfo.port }, (connectionError, connection) => {
-    if (connectionError) throw connectionError;
+async function getTableAndConnection(tableName: string) {
+  let connection: Connection | undefined;
+  let table: Table | undefined;
 
-    return {
-      table: rethink.db(ConnectionInfo.database).table(tableName),
-      connection
-    };
+  await rethink.connect({ host: ConnectionInfo.host, port: ConnectionInfo.port }, (connectionError, conn) => {
+    if (connectionError) {
+      console.error(`connection error ${connectionError}`);
+      throw connectionError;
+    }
+
+    connection = conn;
+    table = rethink.db(ConnectionInfo.database).table(tableName);
   });
 
-  throw new Error('Could not connect to database');
+  if (connection === undefined) throw new Error('Failed to connect to database');
+  if (table === undefined) throw new Error('Failed to connect to table');
+
+  return {
+    table,
+    connection
+  };
 }
 
 function insert(tableName: string) {
-  return (value: any) => {
-    const { connection, table } = getTableAndConnection(tableName);
+  return async (value: any) => {
+    const { connection, table } = await getTableAndConnection(tableName);
 
     table.insert(value).run(connection, (error) => {
-      if (error) throw error;
+      if (error) {
+        console.error(`insert error ${error}`);
+        throw error;
+      }
     });
   };
 
 }
 
 function getAll(tableName: string) {
-  return () => {
-    const { connection, table } = getTableAndConnection(tableName);
-    let values = Array<any>();
+  return async () => {
+    const { connection, table } = await getTableAndConnection(tableName);
+    const values = Array<any>();
 
-    table.getAll().run(connection, async (error, getAllValues) => {
-      if (error) throw error;
+    await table.run(connection, async (error, cursor) => {
+      if (error) {
+        console.error(`get all error ${error}`);
+        throw error;
+      }
 
-      values = await getAllValues.toArray();
+      await cursor.toArray((err, rows) => {
+        rows.forEach(row => values.push(row));
+      });
+
     });
 
     return values;
